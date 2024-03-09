@@ -2,7 +2,11 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
+import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/react";
+import { ClerkProvider } from "@clerk/nextjs";
+import PageContent from "./_components/layout/page-content";
+import Sidebar from "./_components/layout/sidebar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,8 +26,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
+        <ClerkProvider>
+          <TRPCReactProvider>
+            <div className="flex flex-col md:flex-row">
+              <Sidebar />
+              <PageContent>
+                {children}
+              </PageContent>
+            </div>
+          </TRPCReactProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
