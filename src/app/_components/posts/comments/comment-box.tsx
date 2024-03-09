@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { CommentPostSchema } from "@/lib/schema/posts/comment";
 import { Comment } from "@/lib/types/posts";
@@ -13,7 +13,7 @@ import { z } from "zod";
 
 export default ({ postId, comments, setComments }: { postId: string, comments: Comment[], setComments: (state: Comment[]) => void }) => {
   const { user } = useUser();
-  const commentMutation = api.post.comment.useMutation();
+  const commentMutation = api.comment.create.useMutation();
 
   const form = useForm<z.infer<typeof CommentPostSchema>>({
     resolver: zodResolver(CommentPostSchema),
@@ -42,7 +42,10 @@ export default ({ postId, comments, setComments }: { postId: string, comments: C
                 control={form.control}
                 name={"content"}
                 render={({ field }) => (
-                  <Input className="border-0 text-base w-full" placeholder="Share your thoughts with the world!" {...field} />
+                  <FormItem>
+                    <Input className="border-0 text-base w-full" placeholder="Share your thoughts with the world!" {...field} />
+                    <FormMessage />
+                  </FormItem>
                 )}
               />
               <div className="flex items-center justify-end border-t-2 pt-4 px-0 border-solid w-full">

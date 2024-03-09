@@ -1,9 +1,10 @@
 "use client";
-import Comments from "@/app/_components/posts/comments";
+import Comments from "@/app/_components/posts/comments/comments";
 import Post from "@/app/_components/posts/post";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Comment } from "@/lib/types/posts";
 import { api } from "@/trpc/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default ({ params }: { params: { post: string } }) => {
@@ -31,6 +32,14 @@ export default ({ params }: { params: { post: string } }) => {
 
   return (
     <div className="flex flex-col gap-y-4 w-full">
+      <Link href={"/"}>
+        <div className="flex items-center gap-x-3">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.33333 4.16667L2.5 9.99995M2.5 9.99995L8.33333 15.8333M2.5 9.99995H17.5" stroke="#1F2937" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <div className="font-sm font-medium text-gray-800">Back To Posts</div>
+        </div>
+      </Link>
       <Post post={post.data} comments={comments} setComments={setComments} commentBox={true} />
       <Comments comments={comments} />
     </div>

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { DownvoteIcon, UpvoteIcon } from "../svg/post";
-import CommentBox from "./comment-box";
+import CommentBox from "./comments/comment-box";
 
 type SetComment = (state: Comment[]) => void;
 
@@ -69,15 +69,15 @@ export default ({
             <DownvoteIcon className={userVote === false ? "stroke-indigo-500" : "stroke-gray-700"} />
           </Button>
         </div>
-        <div className="flex flex-col gap-y-1 hover:cursor-pointer" onClick={() => router.push(`/posts/${post.id}`)}>
+        <div className={`flex flex-col gap-y-1 w-full ${commentBox ? "" : "hover:cursor-pointer"}`} onClick={() => router.push(`/posts/${post.id}`)}>
           <div className="flex items-center gap-x-3">
             <Image className="rounded-full" src={post.user.imageUrl} alt={`${post.user.name} profile picture`} width={24} height={24} />
             <div className="flex text-sm text-gray-700">
               Posted by {post.user.name} {timeSinceDate(post.createdAt)}
             </div>
           </div>
-          <div className="text-gray-900 text-base font-semibold">{post.title}</div>
-          <div className="text-sm text-gray-700 truncate">{post.content}</div>
+          <div className={`text-gray-900 text-base font-semibold ${commentBox ? "" : "truncate"}`}>{post.title}</div>
+          <div className={`text-sm text-gray-700 ${commentBox ? "" : "truncate"}`}>{post.content}</div>
         </div>
       </div>
       {commentBox && comments !== null && setComments !== null && (

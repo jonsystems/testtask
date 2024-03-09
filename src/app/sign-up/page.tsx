@@ -1,9 +1,9 @@
-import { SignIn } from "@clerk/nextjs";
+import { SignUp } from "@clerk/nextjs";
 
 export default () => {
   return (
     <div className="flex justify-center items-center w-full">
-      <SignIn
+      <SignUp
         appearance={{
           elements: {
             card: "shadow-none",

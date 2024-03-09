@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/react";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -19,6 +20,23 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
+const localization = {
+  signUp: {
+    start: {
+      title: "Join the best community ever",
+      subtitle: "Create an account today",
+      actionText: "Already have an account?"
+    }
+  },
+  signIn: {
+    start: {
+      title: "Welcome back",
+      subtitle: "Enter your login credentials",
+      actionText: "Don't have an account?"
+    }
+  }
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -27,14 +45,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
-        <ClerkProvider>
+        <ClerkProvider localization={localization}>
           <TRPCReactProvider>
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col md:flex-row max-h-screen overflow-y-hidden">
               <Sidebar />
               <PageContent>
                 {children}
               </PageContent>
             </div>
+            <Toaster />
           </TRPCReactProvider>
         </ClerkProvider>
       </body>

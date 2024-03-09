@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CreatePostSchema } from "@/lib/schema/posts/create";
@@ -29,7 +29,7 @@ export default () => {
   if (!user) return null; //loggedout users cant post
 
   return (
-    <div className="flex gap-x-3 min-h-36 h-fit p-4 border border-solid shadow-md rounded-2xl w-full">
+    <div className="flex gap-x-3 min-h-fit h-fit p-4 border border-solid shadow-md rounded-2xl w-full">
       <div className="flex flex-col">
         <Image className="rounded-full" src={user.imageUrl} alt={`${user.fullName} profile picture`} width={32} height={32} />
       </div>
@@ -40,7 +40,10 @@ export default () => {
               control={form.control}
               name={"title"}
               render={({ field }) => (
-                <Input className="border-0 text-base font-semibold w-full" placeholder="Title of your post" {...field} />
+                <FormItem>
+                  <Input className="border-0 text-base font-semibold w-full" placeholder="Title of your post" {...field} />
+                  <FormMessage />
+                </FormItem>
               )}
             />
             <div className="flex flex-col gap-y-2">
@@ -48,7 +51,10 @@ export default () => {
                 control={form.control}
                 name={"content"}
                 render={({ field }) => (
-                  <Textarea className="border-0 text-base w-full" placeholder="Share your thoughts with the world!" {...field} />
+                  <FormItem>
+                    <Textarea className="border-0 text-base w-full" placeholder="Share your thoughts with the world!" {...field} />
+                    <FormMessage />
+                  </FormItem>
                 )}
               />
               <div className="flex justify-end border-t-2 pt-3 px-0 border-solid w-full">

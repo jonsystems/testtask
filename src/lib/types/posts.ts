@@ -7,7 +7,7 @@ export type Post = {
   voteScore: number;
   userVote: null | boolean;
   user: User;
-  comments: null | Comment[],
+  comments: null | Comment[];
   createdAt: Date;
 };
 
@@ -17,5 +17,6 @@ export type Comment = {
   voteScore: number;
   userVote: null | boolean;
   user: User;
+  comments: null | Comment[];
   createdAt: Date;
 };
