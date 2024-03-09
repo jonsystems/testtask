@@ -9,6 +9,8 @@ export default () => {
 	const pathname = usePathname();
 	const { isSignedIn, user } = useUser();
 
+	if (["/sign-in", "/sign-up"].includes(pathname)) return null;
+
 	return (
 		<div className="flex flex-col justify-between p-4 h-screen w-72 border border-r border-solid">
 			<div className="flex flex-col gap-y-1">
