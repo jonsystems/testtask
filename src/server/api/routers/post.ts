@@ -11,7 +11,7 @@ export default createTRPCRouter({
     .query(async ({ ctx }) => {
       const posts = await db.post.findMany({ where: { userId: ctx.session.userId }, include: { user: true, votes: true } })
 
-      let mappedPosts = posts.map((post) => {
+      const mappedPosts = posts.map((post) => {
         const positiveVotes = post.votes.filter(p => p.vote === true).length;
         const negativeVotes = post.votes.filter(p => p.vote === false).length;
 
@@ -190,9 +190,9 @@ export default createTRPCRouter({
     }),
   posts: publicProcedure
     .query(async ({ ctx }) => {
-      let posts = await db.post.findMany({ include: { user: true, votes: true } });
+      const posts = await db.post.findMany({ include: { user: true, votes: true } });
 
-      let mappedPosts = posts.map((post) => {
+      const mappedPosts = posts.map((post) => {
         const positiveVotes = post.votes.filter(p => p.vote === true).length;
         const negativeVotes = post.votes.filter(p => p.vote === false).length;
 
