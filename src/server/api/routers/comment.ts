@@ -88,7 +88,7 @@ export default createTRPCRouter({
 
       return {
         id: comment.id,
-        content: comment.content,
+        content: input.content,
         voteScore: 0,
         userVote: null,
         user: commentReply.user,
